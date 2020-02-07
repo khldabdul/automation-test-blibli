@@ -6,4 +6,4 @@ Feature: Search By Keyword
     Given [ui] blibli page is opened
     And   [ui] set keyword to 'iphone'
     When  [ui] search using keywords
-    Then  search result should containing keyword
+    Then  [ui] search result should containing keyword

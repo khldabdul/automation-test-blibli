@@ -33,18 +33,31 @@ public class BlibliPageSteps extends ScenarioSteps {
         blibliPage.doSearch();
     }
 
-    @When("^\\[ui] search using category$")
-    public void search_using_category() throws InterruptedException {
+    @When("^\\[ui] search using gaming audio category$")
+    public void search_using_gaming_audio_category() {
         blibliPage.doNavigateToCategory();
+        blibliPage.goToGamingAudio();
     }
 
     //-------------- ASSERTIONS
-    @Then("search result should containing keyword")
+    @Then("^\\[ui] search result should containing keyword$")
     public void search_result_should_containing_keyword() {
         List<String> list = blibliPage.getProductNameData();
         for (int i = 0; i <list.size(); i++) {
             assertThat(list.get(i).toLowerCase(), Matchers.containsString(BlibliPageData.getKeyword().toLowerCase()));
-            System.out.println(list.get(i).toLowerCase());
+//            System.out.println(list.get(i).toLowerCase());
         }
+    }
+
+    @Then("^\\[ui] category title equal with '(.*)'$")
+    public void category_title_equal_with(String text) {
+        String title = blibliPage.getCategoryTitle().toLowerCase();
+//        String[] arrOfTitle = title.split("[, &]+");
+        String[] arrOfText = text.split("[, &]+");
+
+        for (String b : arrOfText) assertThat(title, Matchers.containsString(b));
+
+//        System.out.println(title);
+//        System.out.println(text);
     }
 }

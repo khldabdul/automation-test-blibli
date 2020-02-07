@@ -4,10 +4,7 @@ import com.khalidabdul.module.ui.data.BlibliPageData;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +21,21 @@ public class BlibliPage extends PageObject {
     WebElementFacade categoryHover;
 
     @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Komputer & Laptop')]")
-    WebElementFacade komputerCategoryHover;
+    WebElementFacade categoryHoverKomputer;
+
+    @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Kamera')]")
+    WebElementFacade categoryHoverKamera;
+
+    private static String gamingAudioText;
 
     @FindBy(xpath = "//div[@class='categories__item-block'][4]//div//a[contains(text(),'Gaming Audio')]")
-    WebElementFacade gamingAudioHover;
+    WebElementFacade gamingAudio;
 
-    @FindBy(xpath = "//div[@class='sub-category-banner-hover']//div[2]//div[2]")
-    WebElementFacade gamingCategoryHover;
+    @FindBy(xpath = "//div[@class='categories__item-block'][1]//div//a[contains(text(),'Kamera Mirrorless')]")
+    WebElementFacade kameraMirrorless;
 
-    @FindBy(xpath = "//a[@target='$IMAGE_5_TARGET']")
-    WebElementFacade gamingHeadsetButton;
+    @FindBy(xpath = "//h1")
+    WebElementFacade categoryTitle;
 
     public void openHomePage() {
         openUrl("https://www.blibli.com/");
@@ -51,14 +53,29 @@ public class BlibliPage extends PageObject {
         return list;
     }
 
-    public void doNavigateToCategory() throws InterruptedException {
+    public void doNavigateToCategory() {
         Actions a = new Actions(getDriver());
          a.moveToElement(categoryHover).build().perform();
-         Thread.sleep(2000);
+//         Thread.sleep(2000);
 //         waitForElement().until((ExpectedCondition<? extends WebElement>) waitForRenderedElementsToBePresent((By) komputerCategoryHover));
-         a.moveToElement(komputerCategoryHover).build().perform();
 //         waitForElement().until((ExpectedCondition<? extends WebElement>) waitForRenderedElementsToBePresent((By) gamingAudioHover));
-         gamingAudioHover.click();
-
     }
+
+    public void goToGamingAudio() {
+        Actions a = new Actions(getDriver());
+        a.moveToElement(categoryHoverKomputer).build().perform();
+        gamingAudio.waitUntilPresent().click();
+    }
+
+    public void goToKameraMirrorless() {
+        Actions a = new Actions(getDriver());
+        a.moveToElement(categoryHoverKamera).build().perform();
+        kameraMirrorless.click();
+    }
+
+    public String getCategoryTitle() {
+        String title = categoryTitle.getText();
+        return title;
+    }
+
 }
