@@ -12,5 +12,6 @@ Feature: Login User
       | username          | password  | reason                    | status code |
       | null              | null      | both null                 | 400         |
       | null              | password  | email is null             | 400         |
+      | khalid@email.com  | null      | password is null          | 400         |
       | khalidemail.com   | 123456    | email is not valid        | 400         |
       | khalid@email.com  | 123456    | email/password is wrong   | 401         |

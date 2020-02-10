@@ -62,11 +62,16 @@ public class UsersController {
         request.setUsername(UsersData.getUsername());
         request.setPassword(UsersData.getPassword());
 
-        return  given().
-                    header("Content-Type", "application/json").
-                    header("Accept", "application/json").
-                    body(request).
+        System.out.println(request);
+
+        Response response = given().
+                header("Content-Type", "application/json").
+                header("Accept", "application/json").
+                body(request).
                 when().
-                    post("https://www.blibli.com/backend/common/users/_login");
+                post("https://www.blibli.com/backend/common/users/_login");
+        System.out.println("=============================");
+        response.getBody().prettyPrint();
+        return  response;
     }
 }

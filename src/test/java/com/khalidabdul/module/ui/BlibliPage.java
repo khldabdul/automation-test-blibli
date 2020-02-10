@@ -4,6 +4,7 @@ import com.khalidabdul.module.ui.data.BlibliPageData;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
@@ -26,8 +27,6 @@ public class BlibliPage extends PageObject {
     @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Kamera')]")
     WebElementFacade categoryHoverKamera;
 
-    private static String gamingAudioText;
-
     @FindBy(xpath = "//div[@class='categories__item-block'][4]//div//a[contains(text(),'Gaming Audio')]")
     WebElementFacade gamingAudio;
 
@@ -36,6 +35,51 @@ public class BlibliPage extends PageObject {
 
     @FindBy(xpath = "//h1")
     WebElementFacade categoryTitle;
+
+    @FindBy(xpath = "//div[@class='buy-now__button']//div")
+    WebElementFacade buyNowButton;
+
+    @FindBy(xpath = "//div[@class='add-to-cart__button']//div")
+    WebElementFacade addToCartButton;
+
+    @FindBy(xpath = "//body//div[@class='recommended-product']//div//div[2]//a[1]")
+    WebElementFacade recommendedProduct;
+
+    @FindBy(xpath = "//div[@class='flashsale']//div[@class='moving items']//div[3]//div[1]//a[1]")
+    WebElementFacade flashSaleProduct;
+
+    @FindBy(xpath = "//div[@class='quantity__field']//input")
+    WebElementFacade quantityInput;
+
+    @FindBy(xpath = "//div[@id='gdn-cart-button']")
+    WebElementFacade cartButtonHover;
+
+    @FindBy(xpath = "//div[@id='gdn-popup-shopping-bag']//a")
+    WebElementFacade viewCart;
+
+    @FindBy(xpath = "//button[contains(text(),'Checkout')]")
+    WebElementFacade checkoutButton;
+
+    @FindBy(xpath = "//div[@class='summary ']//button")
+    WebElementFacade checkoutLanjutButton;
+
+    @FindBy(xpath = "//select[@id='gdn-payment-option-']")
+    WebElementFacade paymentOption;
+
+    String selectPaymentLevelOne = "//b[contains(text(),'%s')]";
+
+    String SelectPaymentLevelTwo = "//option[contains(text(),'%s')]";
+
+    public void selectPaymentLevelOne(String payment) {
+        String xpath = String.format(selectPaymentLevelOne, payment);
+        WebElementFacade webElementFacade = find(By.xpath(xpath));
+        webElementFacade.click();
+    }
+
+    public void selectPaymentLevelTwo(String payment) {
+        String xpath = String.format(SelectPaymentLevelTwo, payment);
+        find(By.xpath(xpath)).click();
+    }
 
     public void openHomePage() {
         openUrl("https://www.blibli.com/");
@@ -56,9 +100,6 @@ public class BlibliPage extends PageObject {
     public void doNavigateToCategory() {
         Actions a = new Actions(getDriver());
          a.moveToElement(categoryHover).build().perform();
-//         Thread.sleep(2000);
-//         waitForElement().until((ExpectedCondition<? extends WebElement>) waitForRenderedElementsToBePresent((By) komputerCategoryHover));
-//         waitForElement().until((ExpectedCondition<? extends WebElement>) waitForRenderedElementsToBePresent((By) gamingAudioHover));
     }
 
     public void goToGamingAudio() {
@@ -70,7 +111,7 @@ public class BlibliPage extends PageObject {
     public void goToKameraMirrorless() {
         Actions a = new Actions(getDriver());
         a.moveToElement(categoryHoverKamera).build().perform();
-        kameraMirrorless.click();
+        kameraMirrorless.waitUntilPresent().click();
     }
 
     public String getCategoryTitle() {
