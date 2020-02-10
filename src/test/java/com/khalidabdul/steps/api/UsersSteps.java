@@ -1,11 +1,10 @@
 package com.khalidabdul.steps.api;
 
-import com.khalidabdul.module.api.UsersController;
+import com.khalidabdul.module.api.ApiController;
 import com.khalidabdul.module.api.data.UsersData;
 import com.khalidabdul.module.api.response.get.bannerdisplay.GetBannerDisplayResponse;
-import com.khalidabdul.module.api.response.get.searchautocomplete.GetSearchAutocompletePrefixResponse;
-import com.khalidabdul.module.api.response.get.searchautocomplete.GetSearchAutocompletePrefixResponseData;
 import com.khalidabdul.module.api.response.get.searchautocomplete.data.AnchorStore;
+import com.khalidabdul.module.api.response.get.searchbyproduct.GetSearchByProductResponse;
 import com.khalidabdul.module.api.response.post.PostLoginUserResponse;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -55,37 +54,43 @@ public class UsersSteps extends ScenarioSteps {
     //---------------------------- Send Request
     @When("^\\[api] send post login user request$")
     public void send_post_login_user_request () {
-        UsersData.setPostLoginResponse(UsersController.loginUser());
+        UsersData.setPostLoginResponse(ApiController.loginUser());
     }
 
     @When("^\\[api] send get trending search request$")
     public void send_get_trending_search_request () {
-        UsersData.setGetPageResponse(UsersController.getTrendingSearch());
+        UsersData.setGetPageResponse(ApiController.getTrendingSearch());
     }
 
     @When("^\\[api] send get curated keywords request$")
     public void send_get_curated_keywords_request () {
-        UsersData.setGetPageResponse(UsersController.getCuratedKeywords());
+        UsersData.setGetPageResponse(ApiController.getCuratedKeywords());
     }
 
     @When("^\\[api] send get banner display request$")
     public void send_get_banner_display_request () {
-        UsersData.setGetPageResponse(UsersController.getBannerDisplay());
+        UsersData.setGetPageResponse(ApiController.getBannerDisplay());
     }
 
     @When("^\\[api] send get search autocomplete prefix request$")
     public void send_get_search_autocomplete_prefix_request () {
-        UsersData.setGetPageResponse(UsersController.getSearchAutocomplete());
+        UsersData.setGetPageResponse(ApiController.getSearchAutocomplete());
     }
 
     @When("^\\[api] send get search by product request$")
     public void send_get_search_by_product_request () {
-        UsersData.setGetPageResponse(UsersController.getSearchByProduct());
+        UsersData.setGetPageResponse(ApiController.getSearchByProduct());
+    }
+
+    @When("^\\[api] send get search by product request2$")
+    public void send_get_search_by_product_request2 () {
+        GetSearchByProductResponse response = ApiController.getSearchByProduct2();
+        System.out.println(response);
     }
 
     @When("^\\[api] send get payments active request$")
     public void send_get_payments_active_request () {
-        UsersData.setGetPageResponse(UsersController.getPaymentsActive());
+        UsersData.setGetPageResponse(ApiController.getPaymentsActive());
     }
 
     //---------------------------- Check Status Code
@@ -157,6 +162,11 @@ public class UsersSteps extends ScenarioSteps {
             listStore.add(autoCompleteData.get(i).getTerm());
             assertThat(autoCompleteData.get(i).getTerm(), containsString(UsersData.getSearchTermPrefix()));
         }return listStore;
+    }
+
+    @Then("^\\[api] get search by product response equals with request$")
+    public void api_get_search_by_product_response_equals_with_request () {
+
     }
 
 }
