@@ -5,6 +5,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
@@ -21,14 +22,8 @@ public class BlibliPage extends PageObject {
     @FindBy(xpath = "//div[@class='kategori tooltip__trigger']")
     WebElementFacade categoryHover;
 
-    @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Komputer & Laptop')]")
-    WebElementFacade categoryHoverKomputer;
-
     @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Kamera')]")
     WebElementFacade categoryHoverKamera;
-
-    @FindBy(xpath = "//div[@class='categories__item-block'][4]//div//a[contains(text(),'Gaming Audio')]")
-    WebElementFacade gamingAudio;
 
     @FindBy(xpath = "//div[@class='categories__item-block'][1]//div//a[contains(text(),'Kamera Mirrorless')]")
     WebElementFacade kameraMirrorless;
@@ -36,49 +31,43 @@ public class BlibliPage extends PageObject {
     @FindBy(xpath = "//h1")
     WebElementFacade categoryTitle;
 
-    @FindBy(xpath = "//div[@class='buy-now__button']//div")
-    WebElementFacade buyNowButton;
+    @FindBy(xpath = "//div[@class='product__filter']//select[@class='select']")
+    WebElementFacade productFilter;
 
-    @FindBy(xpath = "//div[@class='add-to-cart__button']//div")
-    WebElementFacade addToCartButton;
+    @FindBy(xpath = "//select[@class='select']//option")
+    List<WebElementFacade> filterOption;
 
-    @FindBy(xpath = "//body//div[@class='recommended-product']//div//div[2]//a[1]")
-    WebElementFacade recommendedProduct;
+    @FindBy(xpath = "//span[@class=\"product__body__price__slashed-percentage\"]")
+    List<WebElementFacade> discountValue;
 
-    @FindBy(xpath = "//div[@class='flashsale']//div[@class='moving items']//div[3]//div[1]//a[1]")
-    WebElementFacade flashSaleProduct;
+    String selectFilter = "//option[contains(text(),'%s')]";
 
-    @FindBy(xpath = "//div[@class='quantity__field']//input")
-    WebElementFacade quantityInput;
+    public void selectFilter(String filter) {
+        String xpath = String.format(selectFilter, filter);
 
-    @FindBy(xpath = "//div[@id='gdn-cart-button']")
-    WebElementFacade cartButtonHover;
-
-    @FindBy(xpath = "//div[@id='gdn-popup-shopping-bag']//a")
-    WebElementFacade viewCart;
-
-    @FindBy(xpath = "//button[contains(text(),'Checkout')]")
-    WebElementFacade checkoutButton;
-
-    @FindBy(xpath = "//div[@class='summary ']//button")
-    WebElementFacade checkoutLanjutButton;
-
-    @FindBy(xpath = "//select[@id='gdn-payment-option-']")
-    WebElementFacade paymentOption;
-
-    String selectPaymentLevelOne = "//b[contains(text(),'%s')]";
-
-    String SelectPaymentLevelTwo = "//option[contains(text(),'%s')]";
-
-    public void selectPaymentLevelOne(String payment) {
-        String xpath = String.format(selectPaymentLevelOne, payment);
-        WebElementFacade webElementFacade = find(By.xpath(xpath));
-        webElementFacade.click();
+        System.out.println(find(By.xpath(xpath)).waitUntilPresent().getText());
+        find(By.xpath(xpath)).waitUntilPresent().sendKeys(Keys.ENTER);
     }
 
-    public void selectPaymentLevelTwo(String payment) {
-        String xpath = String.format(SelectPaymentLevelTwo, payment);
-        find(By.xpath(xpath)).click();
+    public List<String> getFilterOption() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < filterOption.size(); i++) {
+            list.add(filterOption.get(i).getText());
+        }
+        return list;
+    }
+
+    public void selectFilterOption(String filter) {
+        productFilter.click();
+        productFilter.sendKeys(Keys.ARROW_DOWN);
+        productFilter.sendKeys(Keys.ENTER);
+        for (int i = 0; i < getFilterOption().size(); i++) {
+            if (getFilterOption().get(i).equalsIgnoreCase(filter)) {
+                break;
+            }else {
+                productFilter.sendKeys(Keys.ARROW_DOWN);
+            }
+        }
     }
 
     public void openHomePage() {
@@ -102,12 +91,6 @@ public class BlibliPage extends PageObject {
          a.moveToElement(categoryHover).build().perform();
     }
 
-    public void goToGamingAudio() {
-        Actions a = new Actions(getDriver());
-        a.moveToElement(categoryHoverKomputer).build().perform();
-        gamingAudio.waitUntilPresent().click();
-    }
-
     public void goToKameraMirrorless() {
         Actions a = new Actions(getDriver());
         a.moveToElement(categoryHoverKamera).build().perform();
@@ -117,6 +100,21 @@ public class BlibliPage extends PageObject {
     public String getCategoryTitle() {
         String title = categoryTitle.getText();
         return title;
+    }
+
+    public List<Integer> getDiscountValue() {
+        List<String> listString = new ArrayList<>();
+        for (int i = 0; i < discountValue.size(); i++) {
+            listString.add(discountValue.get(i).getText().replaceAll("\\D+",""));
+        }
+//        System.out.println(listString);
+        List<Integer> list = new ArrayList<>(listString.size());
+        for (String i : listString) {
+            list.add(Integer.valueOf(i));
+        }
+
+        System.out.println(list);
+        return list;
     }
 
 }

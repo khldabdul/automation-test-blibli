@@ -8,13 +8,14 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.hamcrest.Matchers;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BlibliPageSteps extends ScenarioSteps {
 
-    private BlibliPage blibliPage;
+    BlibliPage blibliPage;
 
     //-------------- PREPARATION
     @Given("^\\[ui] blibli page is opened$")
@@ -29,14 +30,19 @@ public class BlibliPageSteps extends ScenarioSteps {
 
     //-------------- ACTIONS
     @When("^\\[ui] search using keywords$")
-    public void search_using_trending() {
+    public void search_using_keywords() {
         blibliPage.doSearch();
     }
 
-    @When("^\\[ui] search using gaming audio category$")
-    public void search_using_gaming_audio_category() {
+    @When("^\\[ui] search using kamera mirrorless category$")
+    public void search_using_kamera_mirrorless_category() {
         blibliPage.doNavigateToCategory();
-        blibliPage.goToGamingAudio();
+        blibliPage.goToKameraMirrorless();
+    }
+
+    @When("^\\[ui] sort by '(.*)'$")
+    public void sort_by(String value) {
+        blibliPage.selectFilterOption(value);
     }
 
     //-------------- ASSERTIONS
@@ -56,8 +62,15 @@ public class BlibliPageSteps extends ScenarioSteps {
         String[] arrOfText = text.split("[, &]+");
 
         for (String b : arrOfText) assertThat(title, Matchers.containsString(b));
+    }
 
-//        System.out.println(title);
-//        System.out.println(text);
+    @Then("^\\[ui] sorted discount value should equals with request$")
+    public void sorted_discount_value_should_equals_with_request() {
+        List<Integer> list = blibliPage.getDiscountValue();
+        List<Integer> sortedList = blibliPage.getDiscountValue();
+
+        Collections.sort(sortedList, Collections.reverseOrder());
+
+        assertThat(list, Matchers.equalTo(sortedList));
     }
 }

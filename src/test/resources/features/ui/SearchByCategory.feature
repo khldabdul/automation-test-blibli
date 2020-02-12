@@ -1,8 +1,8 @@
-@SearchCategoryFeature @GooglePage @UI @Regression
+@SearchCategoryFeature @BlibliPage @UI @Regression
 Feature: Search By Category
 
   @Positive
-  Scenario: Search by gaming audio category success
+  Scenario: Search by kamera category success
     Given [ui] blibli page is opened
-    When  [ui] search using gaming audio category
-    Then  [ui] category title equal with 'headset, earphone, speaker'
+    When  [ui] search using kamera mirrorless category
+    Then  [ui] category title equal with 'kamera, mirrorless'
