@@ -60,9 +60,9 @@ public class BlibliPage extends PageObject {
     public void selectFilterOption(String filter) {
         productFilter.click();
         productFilter.sendKeys(Keys.ARROW_DOWN);
-        productFilter.sendKeys(Keys.ENTER);
         for (int i = 0; i < getFilterOption().size(); i++) {
             if (getFilterOption().get(i).equalsIgnoreCase(filter)) {
+                productFilter.sendKeys(Keys.ENTER);
                 break;
             }else {
                 productFilter.sendKeys(Keys.ARROW_DOWN);
@@ -88,7 +88,7 @@ public class BlibliPage extends PageObject {
 
     public void doNavigateToCategory() {
         Actions a = new Actions(getDriver());
-         a.moveToElement(categoryHover).build().perform();
+        a.moveToElement(categoryHover).build().perform();
     }
 
     public void goToKameraMirrorless() {
