@@ -3,7 +3,7 @@ Feature: Login User
 
   @Positive
   Scenario: Login user success
-    Given [api] set username to 'yzid.test@gmail.com'
+    Given [api] set username to 'emailforautomationtesting@gmail.com'
     And   [api] set password to 'blibli123'
     When  [api] send post login user request
     Then  [api] login user status code must be '200'

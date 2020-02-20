@@ -8,7 +8,7 @@ Feature: Purchase Items
     And   [ui] select filter official store
     And   [ui] select product number '3'
     And   [ui] select quantity '2'
-    And   [ui] do login with email 'yzid.test@gmail.com' and 'blibli123'
+    And   [ui] do login with email 'emailforautomationtesting@gmail.com' and 'blibli123'
     And   [ui] go to cart and checkout
     And   [ui] select lv one payment 'Transfer'
     And   [ui] select lv two payment 'BCA'
