@@ -1,8 +1,9 @@
 package com.khalidabdul.module.api.data;
 
+import com.khalidabdul.module.api.response.get.searchbyproduct.GetSearchByProductResponse;
 import io.restassured.response.Response;
 
-public class UsersData {
+public class ApiData {
 
     private static String username;
     private static String password;
@@ -12,8 +13,12 @@ public class UsersData {
     private static String searchTermPrefix;
     private static String searchTerm;
 
+    private static String urlProduct;
+
     private static Response getPageResponse;
     private static Response postLoginResponse;
+
+    private static GetSearchByProductResponse getSearchByProductResponse;
 
     public static String getUsername() {
         return username;
@@ -21,9 +26,9 @@ public class UsersData {
 
     public static void setUsername(String username) {
         if (username.equalsIgnoreCase("null")) {
-            UsersData.username = null;
+            ApiData.username = null;
         }else {
-            UsersData.username = username;
+            ApiData.username = username;
         }
     }
 
@@ -33,9 +38,9 @@ public class UsersData {
 
     public static void setPassword(String password) {
         if (password.equalsIgnoreCase("null")) {
-            UsersData.password = null;
+            ApiData.password = null;
         }else {
-            UsersData.password = password;
+            ApiData.password = password;
         }
     }
 
@@ -44,7 +49,7 @@ public class UsersData {
     }
 
     public static void setPageName(String pageName) {
-        UsersData.pageName = pageName;
+        ApiData.pageName = pageName;
     }
 
     public static String getDisplayType() {
@@ -52,7 +57,7 @@ public class UsersData {
     }
 
     public static void setDisplayType(String displayType) {
-        UsersData.displayType = displayType;
+        ApiData.displayType = displayType;
     }
 
     public static String getSearchTermPrefix() {
@@ -60,7 +65,7 @@ public class UsersData {
     }
 
     public static void setSearchTermPrefix(String searchTermPrefix) {
-        UsersData.searchTermPrefix = searchTermPrefix;
+        ApiData.searchTermPrefix = searchTermPrefix;
     }
 
     public static String getSearchTerm() {
@@ -68,15 +73,25 @@ public class UsersData {
     }
 
     public static void setSearchTerm(String searchTerm) {
-        UsersData.searchTerm = searchTerm;
+        ApiData.searchTerm = searchTerm;
     }
+
+
+    public static String getUrlProduct() {
+        return urlProduct;
+    }
+
+    public static void setUrlProduct(String urlProduct) {
+        ApiData.urlProduct = urlProduct;
+    }
+
 
     public static Response getGetPageResponse() {
         return getPageResponse;
     }
 
     public static void setGetPageResponse(Response getPageResponse) {
-        UsersData.getPageResponse = getPageResponse;
+        ApiData.getPageResponse = getPageResponse;
     }
 
     public static Response getPostLoginResponse() {
@@ -84,7 +99,15 @@ public class UsersData {
     }
 
     public static void setPostLoginResponse(Response postLoginResponse) {
-        UsersData.postLoginResponse = postLoginResponse;
+        ApiData.postLoginResponse = postLoginResponse;
+    }
+
+    public static GetSearchByProductResponse getGetSearchByProductResponse() {
+        return getSearchByProductResponse;
+    }
+
+    public static void setGetSearchByProductResponse(GetSearchByProductResponse getSearchByProductResponse) {
+        ApiData.getSearchByProductResponse = getSearchByProductResponse;
     }
 
 }

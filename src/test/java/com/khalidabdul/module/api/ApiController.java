@@ -1,10 +1,10 @@
 package com.khalidabdul.module.api;
 
+import com.khalidabdul.module.api.data.ApiData;
 import com.khalidabdul.module.api.request.post.LoginUserRequest;
-import com.khalidabdul.module.api.data.UsersData;
-import com.khalidabdul.module.api.response.get.searchbyproduct.GetSearchByProductResponse;
 import io.restassured.response.Response;
-import net.serenitybdd.rest.SerenityRest;
+
+import java.util.List;
 
 import static net.serenitybdd.rest.SerenityRest.given;
 
@@ -37,8 +37,8 @@ public class ApiController {
     }
 
     public static Response getBannerDisplay() {
-        String pageNameURL = "pageName="+UsersData.getPageName()+"&";
-        String displayTypeURL = "displayType="+UsersData.getDisplayType();
+        String pageNameURL = "pageName="+ ApiData.getPageName()+"&";
+        String displayTypeURL = "displayType="+ ApiData.getDisplayType();
 
         Response response = given().
                     header("Accept", "application/json").
@@ -52,7 +52,7 @@ public class ApiController {
     }
 
     public static Response getSearchAutocomplete() {
-        String searchTermPrefixURL = "searchTermPrefix="+UsersData.getSearchTermPrefix();
+        String searchTermPrefixURL = "searchTermPrefix="+ ApiData.getSearchTermPrefix();
 
         Response response = given().
                 header("Accept", "application/json").
@@ -65,27 +65,30 @@ public class ApiController {
         return response;
     }
 
-    public static Response getSearchByProduct() {
-        String searchTermURL = "searchTerm="+UsersData.getSearchTerm();
+    public static Response getSearchByProduct(int value) {
+        String searchTermURL = "searchTerm="+ ApiData.getSearchTerm();
 
         Response response = given().
                 header("Accept", "application/json").
                 when().
                 get("https://www.blibli.com/backend/search/products?" + searchTermURL);
         System.out.println(separator);
-        System.out.println("SEARCH BY PRODUCT");
+        System.out.println("SEARCH BY PRODUCT NUMBER " + value);
         System.out.println(separator);
-        response.getBody().prettyPrint();
-        return response;
-    }
 
-    public static GetSearchByProductResponse getSearchByProduct2() {
-        String searchTermURL = "searchTerm="+UsersData.getSearchTerm();
+        List<String> urlProduct = response.path("data.products.url");
+        List<String> productName = response.jsonPath().getList("data.products.name");
+        List<String> productPrice = response.path("data.products.price.priceDisplay");
+        List<String> productStatus = response.path("data.products.status");
 
-        GetSearchByProductResponse response = SerenityRest.given()
-                .header("Content-Type", "application/json")
-                .get("https://www.blibli.com/backend/search/products?" + searchTermURL)
-                .getBody().as(GetSearchByProductResponse.class);
+        value-= 1;
+
+        System.out.println("Name: " + productName.get(value));
+        System.out.println("Price: " + productPrice.get(value));
+        System.out.println("Status: " + productStatus.get(value));
+
+        ApiData.setUrlProduct(urlProduct.get(value));
+
         return response;
     }
 
@@ -103,8 +106,8 @@ public class ApiController {
 
     public static Response loginUser () {
         LoginUserRequest request = new LoginUserRequest();
-        request.setUsername(UsersData.getUsername());
-        request.setPassword(UsersData.getPassword());
+        request.setUsername(ApiData.getUsername());
+        request.setPassword(ApiData.getPassword());
 
         Response response = given().
                 header("Content-Type", "application/json").
