@@ -53,7 +53,7 @@ public class BlibliPage extends PageObject {
     public void goToKameraMirrorless() {
         Actions a = new Actions(getDriver());
         a.moveToElement(categoryHoverKamera).build().perform();
-        kameraMirrorless.click();
+        kameraMirrorless.waitUntilEnabled().click();
     }
 
     public String getCategoryTitle() {
