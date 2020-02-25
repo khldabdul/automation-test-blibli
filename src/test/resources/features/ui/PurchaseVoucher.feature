@@ -9,7 +9,7 @@
       And   [ui] buy 'Steam' game credit voucher
       And   [ui] select voucher nominal by index '2'
       And   [ui] continue to payment
-      And   [ui] do login for voucher payment with credential 'yzid.test@gmail.com' and 'blibli123'
+      And   [ui] do login for voucher payment with credential 'emailforautomationtesting2@gmail.com' and 'blibli123blibli123'
       And   [ui] select lv one payment 'Transfer' for voucher
       And   [ui] select lv two payment 'BCA' for voucher
       And   [ui] click buy now button

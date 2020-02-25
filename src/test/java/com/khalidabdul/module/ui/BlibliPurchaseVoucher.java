@@ -5,7 +5,6 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.Select;
 
 public class BlibliPurchaseVoucher extends PageObject {
 
@@ -15,9 +14,6 @@ public class BlibliPurchaseVoucher extends PageObject {
 
     @FindBy(xpath = "//div[@class='form__row-3']//input")
     WebElementFacade nominalInput;
-
-    @FindBy(xpath = "//div[@class='form__row-3']//div//div")
-    WebElementFacade nominalInputOption;
 
     @FindBy(xpath = "//div[@class='form__result-btn']")
     WebElementFacade continueToPayment;

@@ -4,8 +4,6 @@ import com.khalidabdul.module.ui.data.BlibliPageData;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
@@ -31,45 +29,6 @@ public class BlibliPage extends PageObject {
     @FindBy(xpath = "//h1")
     WebElementFacade categoryTitle;
 
-    @FindBy(xpath = "//div[@class='product__filter']//select[@class='select']")
-    WebElementFacade productFilter;
-
-    @FindBy(xpath = "//select[@class='select']//option")
-    List<WebElementFacade> filterOption;
-
-    @FindBy(xpath = "//span[@class=\"product__body__price__slashed-percentage\"]")
-    List<WebElementFacade> discountValue;
-
-    String selectFilter = "//option[contains(text(),'%s')]";
-
-    public void selectFilter(String filter) {
-        String xpath = String.format(selectFilter, filter);
-
-        System.out.println(find(By.xpath(xpath)).waitUntilPresent().getText());
-        find(By.xpath(xpath)).waitUntilPresent().sendKeys(Keys.ENTER);
-    }
-
-    public List<String> getFilterOption() {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < filterOption.size(); i++) {
-            list.add(filterOption.get(i).getText());
-        }
-        return list;
-    }
-
-    public void selectFilterOption(String filter) {
-        productFilter.click();
-        productFilter.sendKeys(Keys.ARROW_DOWN);
-        for (int i = 0; i < getFilterOption().size(); i++) {
-            if (getFilterOption().get(i).equalsIgnoreCase(filter)) {
-                productFilter.sendKeys(Keys.ENTER);
-                break;
-            }else {
-                productFilter.sendKeys(Keys.ARROW_DOWN);
-            }
-        }
-    }
-
     public void openHomePage() {
         openUrl("https://www.blibli.com/");
     }
@@ -80,8 +39,8 @@ public class BlibliPage extends PageObject {
 
     public List<String> getProductNameData() {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < productNameData.size(); i++) {
-            list.add(productNameData.get(i).getText());
+        for (WebElementFacade productNameDatum : productNameData) {
+            list.add(productNameDatum.getText());
         }
         return list;
     }
@@ -94,27 +53,11 @@ public class BlibliPage extends PageObject {
     public void goToKameraMirrorless() {
         Actions a = new Actions(getDriver());
         a.moveToElement(categoryHoverKamera).build().perform();
-        kameraMirrorless.waitUntilPresent().click();
+        kameraMirrorless.click();
     }
 
     public String getCategoryTitle() {
-        String title = categoryTitle.getText();
-        return title;
-    }
-
-    public List<Integer> getDiscountValue() {
-        List<String> listString = new ArrayList<>();
-        for (int i = 0; i < discountValue.size(); i++) {
-            listString.add(discountValue.get(i).getText().replaceAll("\\D+",""));
-        }
-//        System.out.println(listString);
-        List<Integer> list = new ArrayList<>(listString.size());
-        for (String i : listString) {
-            list.add(Integer.valueOf(i));
-        }
-
-        System.out.println(list);
-        return list;
+        return categoryTitle.getText();
     }
 
 }

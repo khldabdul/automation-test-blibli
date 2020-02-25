@@ -8,7 +8,6 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.steps.ScenarioSteps;
 import org.hamcrest.Matchers;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -40,37 +39,22 @@ public class BlibliPageSteps extends ScenarioSteps {
         blibliPage.goToKameraMirrorless();
     }
 
-    @When("^\\[ui] sort by '(.*)'$")
-    public void sort_by(String value) {
-        blibliPage.selectFilterOption(value);
-    }
-
     //-------------- ASSERTIONS
     @Then("^\\[ui] search result should containing keyword$")
     public void search_result_should_containing_keyword() {
         List<String> list = blibliPage.getProductNameData();
-        for (int i = 0; i <list.size(); i++) {
-            assertThat(list.get(i).toLowerCase(), Matchers.containsString(BlibliPageData.getKeyword().toLowerCase()));
-//            System.out.println(list.get(i).toLowerCase());
+        for (String s : list) {
+            System.out.println(s);
+            assertThat(s.toLowerCase(), Matchers.containsString(BlibliPageData.getKeyword().toLowerCase()));
         }
     }
 
     @Then("^\\[ui] category title equal with '(.*)'$")
     public void category_title_equal_with(String text) {
         String title = blibliPage.getCategoryTitle().toLowerCase();
-//        String[] arrOfTitle = title.split("[, &]+");
         String[] arrOfText = text.split("[, &]+");
 
         for (String b : arrOfText) assertThat(title, Matchers.containsString(b));
     }
 
-    @Then("^\\[ui] sorted discount value should equals with request$")
-    public void sorted_discount_value_should_equals_with_request() {
-        List<Integer> list = blibliPage.getDiscountValue();
-        List<Integer> sortedList = blibliPage.getDiscountValue();
-
-        Collections.sort(sortedList, Collections.reverseOrder());
-
-        assertThat(list, Matchers.equalTo(sortedList));
-    }
 }

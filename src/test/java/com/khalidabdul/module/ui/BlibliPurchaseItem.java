@@ -15,7 +15,7 @@ public class BlibliPurchaseItem extends PageObject {
     @FindBy(xpath = "//div[@class='kategori tooltip__trigger']")
     WebElementFacade categoryHover;
 
-    @FindBy(xpath = "//div[contains(text(),'Official Store')]")
+    @FindBy(xpath = "//div[@class='multi-select-filter os-filter']//div[@class='facet-text'][contains(text(),'Official Store')]")
     WebElementFacade officialStoreCheckbox;
 
     @FindBy(xpath = "//div[@class='product__name-text']//h1")
@@ -24,14 +24,8 @@ public class BlibliPurchaseItem extends PageObject {
     @FindBy(xpath = "//div[@class='buy-now__button']//div")
     WebElementFacade buyNowButton;
 
-//    @FindBy(xpath = "//div[@class='add-to-cart__button']//div")
-//    WebElementFacade addToCartButton;
-
     @FindBy(xpath = "//div[@class='quantity__field']//input")
     WebElementFacade quantityInput;
-
-//    @FindBy(xpath = "//div[@class='cart__amt']")
-//    WebElementFacade cartAmount;
 
     @FindBy(xpath = "//article[@class='ticker warning has-icon']")
     WebElementFacade notifWarning;
@@ -51,12 +45,6 @@ public class BlibliPurchaseItem extends PageObject {
     @FindBy(xpath = "//input[@type='password']")
     WebElementFacade passwordInput;
 
-//    @FindBy(xpath = "//a[@id='gdn-pnv-later']")
-//    WebElementFacade phoneVerificationLater;
-//
-//    @FindBy(xpath = "//a[contains(text(), 'Lanjutkan')]")
-//    WebElementFacade phoneVerificationLanjutkan;
-
     @FindBy(xpath = "//button[contains(text(),'Checkout')]")
     WebElementFacade checkoutButton;
 
@@ -65,12 +53,6 @@ public class BlibliPurchaseItem extends PageObject {
 
     @FindBy(xpath = "//div[@id='payment-method-selection']//select")
     WebElementFacade paymentOption;
-
-//    @FindBy(xpath = "//div[@id='payment-method-selection']//select//option")
-//    WebElementFacade paymentOptionSelect;
-//
-//    @FindBy(xpath = "//input[@type='checkbox']")
-//    WebElementFacade checkboxSNK;
 
     @FindBy(xpath = "//input[@id='gdn-submit-checkout']/parent::div")
     WebElementFacade bayarSekarang;
@@ -86,9 +68,6 @@ public class BlibliPurchaseItem extends PageObject {
 
     @FindBy(xpath = "//label[@class='product-label']")
     List<WebElementFacade> orderProductTitle;
-
-//    @FindBy(xpath = "//span[@class='product-quantity'][1]//strong")
-//    List<WebElementFacade> orderProductAmount;
 
     @FindBy(xpath = "//ul[@class='purchase-summary']//li[1]//span[2]")
     WebElementFacade totalPurchase;

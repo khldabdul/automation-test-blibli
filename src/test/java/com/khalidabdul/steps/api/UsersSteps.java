@@ -149,12 +149,12 @@ public class UsersSteps extends ScenarioSteps {
 
     @Then("^\\[api] get search autocomplete prefix response equals with request$")
     public List<String> api_get_search_autocomplete_prefix_response_equals_with_request () {
-//        List<GetSearchAutocompletePrefixResponse> response = ApiData.getGetPageResponse().getBody().as(GetSearchAutocompletePrefixResponse.class);
         List<String> listStore = new ArrayList<>();
-        for (int i = 0; i < autoCompleteData.size(); i++) {
-            listStore.add(autoCompleteData.get(i).getTerm());
-            assertThat(autoCompleteData.get(i).getTerm(), containsString(ApiData.getSearchTermPrefix()));
-        }return listStore;
+        for (AnchorStore autoCompleteDatum : autoCompleteData) {
+            listStore.add(autoCompleteDatum.getTerm());
+            assertThat(autoCompleteDatum.getTerm(), containsString(ApiData.getSearchTermPrefix()));
+        }
+        return listStore;
     }
 
     @Then("^\\[api] get search by product response equals with request$")

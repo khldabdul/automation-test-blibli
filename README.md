@@ -33,6 +33,10 @@ Cucumber testing framework using Serenity written in Java.
 * Search by Category
 * Sort by Discount Value
 * Purchase Item
+* Purchase Game Voucher
+
+### Cross API & UI Features
+* Search Product by Keyword, and Then 
 
 ## Functionality Capabilities
 #### Login
