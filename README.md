@@ -20,8 +20,8 @@ Included in 'pom.xml' for maven dependency
 * Web Application
 
 ## Preview
-* Blibli Web App Test Result
-[web_app_test] (https://youtu.be/Ln0cQ9SglaM)
+* Blibli Web App Test Result (in Video)
+[![web_app_test](https://user-images.githubusercontent.com/16284196/75496513-f58ffa00-59f3-11ea-90c2-bc035b382b96.png)](https://youtu.be/Ln0cQ9SglaM)
 
 ## Features
 ### API Features
@@ -44,7 +44,7 @@ Included in 'pom.xml' for maven dependency
 * Search Product by Keyword with API
 * Then, Purchase Product with UI Features
 
-## Functionality Capabilities
+## Functional UI Capabilities
 #### Login
 * Login with Email & Password
 
@@ -57,6 +57,7 @@ Included in 'pom.xml' for maven dependency
 * Print Item List
 
 #### Summary
+* Set Quantity/Amount
 * Buy Now
 
 #### Checkout
@@ -64,6 +65,7 @@ Included in 'pom.xml' for maven dependency
 * Pay Now
 
 #### Thank You Page
+(Can be used for tracking order)
 * Print Item/Product Name
 * Print Total Purchase
 * Print Virtual Account Number
