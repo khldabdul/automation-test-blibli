@@ -20,13 +20,8 @@ Included in 'pom.xml' for maven dependency
 * Web Application
 
 ## Preview
-<<<<<<< HEAD
 * Blibli Web App Test Result (in Video)
 [![web_app_test](https://user-images.githubusercontent.com/16284196/75496513-f58ffa00-59f3-11ea-90c2-bc035b382b96.png)](https://youtu.be/Ln0cQ9SglaM)
-=======
-* Blibli Web App Test Result
-[web_app_test] (https://youtu.be/Ln0cQ9SglaM)
->>>>>>> parent of b43c9b8... Update README.md
 
 ## Features
 ### API Features
