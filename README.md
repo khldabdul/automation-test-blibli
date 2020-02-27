@@ -5,6 +5,7 @@ This project is Java implementation of Selenium software-testing framework and
 Cucumber testing framework using Serenity written in Java.
 
 ### Development Technology
+Included in 'pom.xml' for maven dependency
 * Selenium
 * Serenity
 * Cucumber
@@ -13,10 +14,14 @@ Cucumber testing framework using Serenity written in Java.
 
 ### Build Automation Tools
 * GitHub
-* [Maven](https://maven.apache.org/)
+* Maven
 
 ### Platform
 * Web Application
+
+## Preview
+*Blibli Web App Test Result
+[web_app_test] (https://youtu.be/Ln0cQ9SglaM)
 
 ## Features
 ### API Features
@@ -36,7 +41,8 @@ Cucumber testing framework using Serenity written in Java.
 * Purchase Game Voucher
 
 ### Cross API & UI Features
-* Search Product by Keyword, and Then 
+* Search Product by Keyword with API
+* Then, Purchase Product with UI Features
 
 ## Functionality Capabilities
 #### Login
@@ -47,7 +53,6 @@ Cucumber testing framework using Serenity written in Java.
 * Select Category
 
 #### Search
-* Sort by
 * Filter by Official Store
 * Print Item List
 
