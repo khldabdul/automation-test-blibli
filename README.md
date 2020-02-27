@@ -21,7 +21,6 @@ Included in 'pom.xml' for maven dependency
 
 ## Preview
 * Blibli Web App Test Result
-[web_app_test] (https://youtu.be/Ln0cQ9SglaM)
 
 ## Features
 ### API Features
