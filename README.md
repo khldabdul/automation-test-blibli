@@ -20,7 +20,7 @@ Included in 'pom.xml' for maven dependency
 * Web Application
 
 ## Preview
-*Blibli Web App Test Result
+* Blibli Web App Test Result
 [web_app_test] (https://youtu.be/Ln0cQ9SglaM)
 
 ## Features
