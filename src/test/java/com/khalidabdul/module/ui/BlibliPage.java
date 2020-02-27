@@ -23,7 +23,7 @@ public class BlibliPage extends PageObject {
     @FindBy(xpath = "//a[@class='categories__menu-item'][contains(text(),'Kamera')]")
     WebElementFacade categoryHoverKamera;
 
-    @FindBy(xpath = "//div[@class='categories__item-block'][1]//div//a[contains(text(),'Kamera Mirrorless')]")
+    @FindBy(xpath = "//div[@class='categories__item-block'][3]//div//a[contains(text(),'Kamera Mirrorless')]")
     WebElementFacade kameraMirrorless;
 
     @FindBy(xpath = "//h1")
@@ -53,7 +53,7 @@ public class BlibliPage extends PageObject {
     public void goToKameraMirrorless() {
         Actions a = new Actions(getDriver());
         a.moveToElement(categoryHoverKamera).build().perform();
-        kameraMirrorless.waitUntilEnabled().click();
+        kameraMirrorless.waitUntilPresent().click();
     }
 
     public String getCategoryTitle() {
