@@ -14,20 +14,18 @@ pipeline {
     }
     stage('API Test') {
       steps {
-          script {
-            try {
-                bat 'mvn verify -Dcucumber.options="--tags @API"'
-            } catch (e) {
-                print e
-            }
-          }
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          bat 'mvn verify -Dcucumber.options="--tags @API"'
+        }
       }
     }
     stage('UI Test') {
       parallel {
         stage('Chrome') {
           steps {
-            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
+            }
           }
         }
         stage('Firefox') {
