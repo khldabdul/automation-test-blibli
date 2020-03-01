@@ -9,7 +9,7 @@ pipeline {
     stage('API Test') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          bat 'mvn verify -Dcucumber.options="--tags @API"'
+          bat 'mvn clean verify -Dcucumber.options="--tags @API"'
         }
       }
     }

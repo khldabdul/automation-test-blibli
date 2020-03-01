@@ -1,4 +1,4 @@
-@PurchaseVoucherFeature @BlibliPurchaseItem @UI @Regression
+@PurchaseVoucherFeature @BlibliPurchaseItem @Regression
   Feature: Purchase Voucher
 
     @Positive
