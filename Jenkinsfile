@@ -13,11 +13,15 @@ pipeline {
       }
     }
     stage('API Test') {
-         try {
-             bat 'mvn verify -Dcucumber.options="--tags @API"'
+      steps {
+          script {
+            try {
+                bat 'mvn verify -Dcucumber.options="--tags @API"'
+            } catch (e) {
+                print e
+            }
           }
-          catch (exc) {
-          }
+      }
     }
     stage('UI Test') {
       parallel {
