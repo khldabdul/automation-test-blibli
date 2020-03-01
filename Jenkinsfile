@@ -24,7 +24,9 @@ pipeline {
         }
         stage('Firefox') {
           steps {
-            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
+            catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
+            }
           }
         }
       }
