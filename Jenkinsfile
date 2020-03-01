@@ -1,11 +1,5 @@
 pipeline {
   agent any
-  try {
-
-  }
-  catch(all) {
-
-  }
   stages {
     stage('Checkout SCM') {
       steps {
