@@ -14,9 +14,7 @@ pipeline {
     }
     stage('API Test') {
          try {
-            steps {
-                 bat 'mvn verify -Dcucumber.options="--tags @API"'
-              }
+             bat 'mvn verify -Dcucumber.options="--tags @API"'
           }
           catch (exc) {
           }
