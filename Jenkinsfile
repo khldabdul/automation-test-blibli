@@ -13,32 +13,24 @@ pipeline {
       }
     }
     stage('API Test') {
-      steps {
          try {
-              bat 'mvn verify -Dcucumber.options="--tags @API"'
+            steps {
+                 bat 'mvn verify -Dcucumber.options="--tags @API"'
+              }
           }
           catch (exc) {
           }
-      }
     }
     stage('UI Test') {
       parallel {
         stage('Chrome') {
           steps {
-            try {
-                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
-            }
-            catch (exc) {
-            }
+            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
           }
         }
         stage('Firefox') {
           steps {
-            try {
-                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
-            }
-            catch (exc) {
-            }
+            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
           }
         }
       }
