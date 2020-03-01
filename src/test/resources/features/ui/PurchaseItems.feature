@@ -1,4 +1,4 @@
-@PurchaseItemsFeature @BlibliPurchaseItem @UI @Regression
+@PurchaseItemsFeature @BlibliPurchaseItem @Regression
 Feature: Purchase Items
 
   @Positive
