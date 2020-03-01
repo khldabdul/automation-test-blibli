@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  try {
+
+  }
+  catch(all) {
+
+  }
   stages {
     stage('Checkout SCM') {
       steps {
@@ -8,19 +14,31 @@ pipeline {
     }
     stage('API Test') {
       steps {
-        bat 'mvn verify -Dcucumber.options="--tags @API"'
+         try {
+              bat 'mvn verify -Dcucumber.options="--tags @API"'
+          }
+          catch (exc) {
+          }
       }
     }
     stage('UI Test') {
       parallel {
         stage('Chrome') {
           steps {
-            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
+            try {
+                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=chrome'
+            }
+            catch (exc) {
+            }
           }
         }
         stage('Firefox') {
           steps {
-            bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
+            try {
+                bat 'mvn verify -Dcucumber.options="--tags @UI" -Dwebdriver.driver=firefox'
+            }
+            catch (exc) {
+            }
           }
         }
       }
